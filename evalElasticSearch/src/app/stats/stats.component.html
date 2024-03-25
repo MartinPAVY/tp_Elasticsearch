@@ -1,0 +1,29 @@
+<mat-expansion-panel class="panel" hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-title><mat-icon class="panel-icon">query_stats</mat-icon>Statistiques</mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <div class="section">
+    <h3>Durée moyenne des morceaux</h3>
+    <p *ngIf="statistics.averageSongLength.error == null">
+      La durée moyenne d'un morceaux est de <strong>{{ millisecondsToMinuteString(statistics.averageSongLength.result) }}</strong>
+    </p>
+    <error-box [error]="statistics.averageSongLength.error" *ngIf="statistics.averageSongLength.error != null"></error-box>
+  </div>
+
+  <div class="section">
+    <h3>Nombre unique de genres</h3>
+    <p *ngIf="statistics.averageSongLength.error == null">
+      La base de données contient <strong>{{ statistics.uniqueGenres.result }}</strong> genres uniques de musique
+    </p>
+    <error-box [error]="statistics.averageSongLength.error" *ngIf="statistics.averageSongLength.error != null"></error-box>
+  </div>
+
+  <div class="section">
+    <h3>Top 5 des artistes les plus publiés</h3>
+    <p *ngIf="statistics.averageSongLength.error == null">
+      Les 5 artistes avec le plus de morceaux publiés sont <strong>{{ statistics.topFiveMostPublishedArtists.result.join(", ") }}</strong>
+    </p>
+    <error-box [error]="statistics.averageSongLength.error" *ngIf="statistics.averageSongLength.error != null"></error-box>
+  </div>
+</mat-expansion-panel>

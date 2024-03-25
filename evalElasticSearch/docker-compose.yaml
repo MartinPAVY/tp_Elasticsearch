@@ -1,0 +1,31 @@
+services:
+  elasticsearch:
+    image: elasticsearch:8.10.2
+    container_name: elasticsearch
+    restart: unless-stopped
+    environment:
+      - xpack.security.enabled='false'
+      - discovery.type=single-node
+      - http.cors.enabled='true'
+      - http.cors.allow-origin="*"
+      - http.cors.allow-methods=OPTIONS,HEAD,GET,POST,PUT,DELETE
+      - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+
+  kibana:
+    image: kibana:8.10.2
+    container_name: kibana
+    restart: unless-stopped
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+
+volumes:
+  esdata:

@@ -1,0 +1,7 @@
+<mat-expansion-panel class="panel" color="warn" hideToggle [expanded]="error != null">
+  <mat-expansion-panel-header class="panel-header">
+    <mat-panel-title><mat-icon class="panel-icon" color="warn">error</mat-icon>Erreur</mat-panel-title>
+  </mat-expansion-panel-header>
+  <ngx-json-viewer class="json-viewer" [json]="sanitizeError(error)"></ngx-json-viewer>
+</mat-expansion-panel>
+

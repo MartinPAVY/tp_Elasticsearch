@@ -1,0 +1,59 @@
+ul {
+  margin: 10px 10%;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  margin: 5px 0;
+  border-radius: 4px;
+  padding: 10px 0;
+
+  &:hover {
+    background-color: #F5F5F5;
+  }
+}
+
+li .details {
+  color: #777777;
+  font-weight: 300;
+  font-size: 0.75em;
+}
+
+li .spotify-icon {
+  align-self: center;
+  margin: 0 16px;
+  line-height: 0;
+}
+
+li .song-info {
+  flex: 2 2 0;
+  line-height: normal;
+
+  .track-name {
+    font-weight: 500;
+  }
+
+  & > span {
+    display: block;
+  }
+}
+
+li .album {
+  flex: 1 1 0;
+  text-align: left;
+  color: #777777;
+}
+
+li .genre {
+  flex: 1 1 0;
+  text-align: center;
+}
+
+li .duration {
+  margin-right: 40px;
+  text-align: right;
+}

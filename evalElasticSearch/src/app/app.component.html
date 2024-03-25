@@ -1,0 +1,55 @@
+<header>
+  <mat-toolbar class="toolbar" color="primary">
+    <h1><strong>TP Elasticsearch</strong> : Recherche dans le dataset "Spotify Tracks"</h1>
+  </mat-toolbar>
+</header>
+
+<main>
+  <form (ngSubmit)="search()">
+    <div class="search-bar-container">
+      <mat-form-field>
+        <mat-label>Recherche</mat-label>
+        <input type="search" autocomplete="off" [(ngModel)]="searchQuery" name="searchQuery" matInput>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Filtres à utiliser</mat-label>
+        <mat-select [(ngModel)]="selectedService" name="selectedService">
+          <mat-option [value]="1">Basiques</mat-option>
+          <mat-option [value]="2">Intermédiaires</mat-option>
+          <mat-option [value]="3">Avancés</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-fab color="primary" aria-label="Rechercher"><mat-icon>search</mat-icon></button>
+    </div>
+
+    <search-filters [(filters)]="searchFilters" [serviceLevel]="selectedService"></search-filters>
+
+    <stats></stats>
+  </form>
+
+  <h2>Résultats <span *ngIf="searchResults.length > 0">({{ searchResults.length }})</span></h2>
+  <div class="no-results" *ngIf="!isSearching && searchResults.length == 0 && searchError == null">Aucun résultat</div>
+  <error-box class="error-box" *ngIf="!isSearching && searchError != null" [error]="searchError"></error-box>
+  <div class="spinner">
+    <mat-spinner *ngIf="isSearching"></mat-spinner>
+  </div>
+
+  <search-results [results]="searchResults"></search-results>
+</main>
+
+<footer>
+  <mat-toolbar class="footer-toolbar">
+    <div class="footer-row">
+      <div>
+        Ce TP utilise le dataset <a href="https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset" target="blank">Spotify Tracks Dataset</a>
+        publié sur <strong>Kaggle</strong> par <a href="https://www.kaggle.com/maharshipandya" target="_blank">MaharshiPandya</a>.
+      </div>
+      <div>
+        Exercises et support conçus par <a href="https://www.linkedin.com/in/marius-usvat/">Marius USVAT</a>
+      </div>
+    </div>
+    <div class="footer-row">
+      &copy; DWWM EPSI ONLINE
+    </div>
+  </mat-toolbar>
+</footer>

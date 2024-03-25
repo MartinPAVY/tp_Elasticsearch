@@ -1,0 +1,86 @@
+<mat-expansion-panel class="panel" hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-title><mat-icon class="panel-icon">filter_list</mat-icon>Filtres</mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <div class="section" *ngIf="serviceLevel > 0">
+    <h3>Precision</h3>
+
+    <div class="slider-grid" *ngIf="serviceLevel > 1">
+      <div class="slider-container">
+        <label>
+          Nombre de résultats ( <span>{{ filters.maxResults }}</span> )
+        </label>
+        <mat-slider class="slider" [min]="5" [max]="50" discrete="true">
+          <input [(ngModel)]="filters.maxResults" name="maxResults" matSliderThumb>
+        </mat-slider>
+      </div>
+      <div class="slider-container"></div>
+      <div class="slider-container" *ngIf="serviceLevel > 2">
+        <label>
+          Popularité ( <span>{{ filters.popularity.min }}</span> - <span>{{ filters.popularity.max }}</span> )
+        </label>
+        <mat-slider class="slider" [min]="0" [max]="100" discrete="true">
+          <input [(ngModel)]="filters.popularity.min" name="popularityFilterMin" matSliderStartThumb>
+          <input [(ngModel)]="filters.popularity.max" name="popularityFilterMax" matSliderEndThumb>
+        </mat-slider>
+      </div>
+      <div class="slider-container" *ngIf="serviceLevel > 2">
+        <label>
+          Durée ( <span>{{ filters.duration.min }}</span> min - <span>{{ filters.duration.max }} min</span> )
+        </label>
+        <mat-slider class="slider" [min]="0" [max]="90" discrete="true">
+          <input [(ngModel)]="filters.duration.min" name="durationFilterMin" matSliderStartThumb>
+          <input [(ngModel)]="filters.duration.max" name="durationFilterMax" matSliderEndThumb>
+        </mat-slider>
+      </div>
+    </div>
+
+    <div class="checkboxes">
+      <mat-checkbox class="checkbox" color="primary" [(ngModel)]="filters.matchExactly" name="matchExactly">
+        Recherche exacte
+      </mat-checkbox>
+      <mat-checkbox class="checkbox" color="primary" [(ngModel)]="filters.excludeExplicit" name="excludeExplicit" *ngIf="serviceLevel > 1">
+        Exclure les résultats comportant un langage explicite
+      </mat-checkbox>
+    </div>
+  </div>
+
+  <div class="section" *ngIf="serviceLevel > 1">
+    <h3>Champs de Recherche</h3>
+    <mat-chip-listbox class="chipbox" aria-label="Selection des champs de recherche" multiple="true" (change)="updateSearchFields($event)">
+      <mat-chip-option value="track_name" selected="true">Titres</mat-chip-option>
+      <mat-chip-option value="album_name" selected="true">Albums</mat-chip-option>
+      <mat-chip-option value="artists" selected="true">Artistes</mat-chip-option>
+    </mat-chip-listbox>
+  </div>
+
+  <div class="section" *ngIf="serviceLevel > 2">
+    <h3>Genres</h3>
+    <mat-chip-listbox class="chipbox" aria-label="Selection du genre" multiple="true" (change)="updateGenresFilter($event)">
+      <mat-chip-option value="acoustic">Acoustique</mat-chip-option>
+      <mat-chip-option value="blues">Blues</mat-chip-option>
+      <mat-chip-option value="classical">Classique</mat-chip-option>
+      <mat-chip-option value="country">Country</mat-chip-option>
+      <mat-chip-option value="dance">Dance</mat-chip-option>
+      <mat-chip-option value="edm">EDM</mat-chip-option>
+      <mat-chip-option value="study">Etude</mat-chip-option>
+      <mat-chip-option value="folk">Folklorique</mat-chip-option>
+      <mat-chip-option value="hard-rock">Hard Rock</mat-chip-option>
+      <mat-chip-option value="heavy-metal">Heavy Metal</mat-chip-option>
+      <mat-chip-option value="hip-hop">Hip Hop</mat-chip-option>
+      <mat-chip-option value="house">House</mat-chip-option>
+      <mat-chip-option value="indie">Indépendante</mat-chip-option>
+      <mat-chip-option value="j-pop">J-pop</mat-chip-option>
+      <mat-chip-option value="j-rock">J-rock</mat-chip-option>
+      <mat-chip-option value="jazz">Jazz</mat-chip-option>
+      <mat-chip-option value="k-pop">K-pop</mat-chip-option>
+      <mat-chip-option value="metal">Métal</mat-chip-option>
+      <mat-chip-option value="pop">Pop</mat-chip-option>
+      <mat-chip-option value="punk">Punk</mat-chip-option>
+      <mat-chip-option value="alt-rock">Rock Alternatif</mat-chip-option>
+      <mat-chip-option value="soul">Soul</mat-chip-option>
+      <mat-chip-option value="trance">Trance</mat-chip-option>
+    </mat-chip-listbox>
+  </div>
+</mat-expansion-panel>
